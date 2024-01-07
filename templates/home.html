@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<div class="container d-flex flex-wrap px-5 pt-3 align-items-center">
+    <div class="col-6">
+        <h1>Welcome to AutoMobile</h1>
+        <p>Your ultimate destination for top-tier vehicles at unbeatable prices. Explore a diverse selection of cars, from sleek sedans to rugged SUVs, all meticulously inspected for quality. Enjoy a seamless online shopping experience with intuitive navigation and personalized recommendations. Benefit from easy financing, hassle-free trade-ins, and exceptional customer support. Join us and turn your automotive dreams into reality. Start exploring now!</p>
+    </div>
+    <div class="col-6">
+        <img class="w-75" src="{% static "huracan.jpg" %}" alt="">
+    </div>
+</div>
+<div class="text-center mt-5">
+    {% for brnd in brand %}
+    <a class="btn btn-secondary" href="{% url "brand_wise_car" brnd.slug %}">{{brnd.name}}</a>
+    {% endfor %}
+</div>
+<div class="col-10 p-3">
+    <h4 class='text-center'>{{ car|length }} cars found</h4>
+    <div class="d-flex flex-wrap justify-content-center px-3 pt-5">
+        {% for cr in car %}
+        <div class="col-sm-3 mb-3 mb-sm-0">
+            <div class="card mx-2">
+              <div class="card-body">
+                <img src="{{cr.image.url}}" class="card-img-top" alt="...">
+                <h5 class="card-title">{{cr.brand}} {{cr.model_name}}</h5>
+                <p class="card-text">Brand: {{cr.brand}}</p>
+                <p class="card-text">Price: ${{cr.price}}</p>
+                <p class="card-text"><a href="{% url "car_detail" cr.id %}" class="text-dark"><small>View Details</small></a></p>
+              </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

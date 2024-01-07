@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block content %}
+<div>
+    <a class="btn btn-primary" href="{% url "edit_profile" user.id %}">Edit Your Profile</a>
+</div>
+<h1>{{user.username}}'s Profile: </h1>
+<div class="d-flex flex-wrap justify-content-center px-3 pt-5">
+{% for car in cars %}
+    <div class="col-sm-3 mb-3 mb-sm-0">
+        <div class="card mx-2">
+            <div class="card-body">
+                <img src="{{car.image.url}}" class="card-img-top" alt="...">
+                <h5 class="card-title">{{car.brand}} {{car.model_name}}</h5>
+                <p class="card-text">Brand: {{car.brand}}</p>
+                <p class="card-text">Price: ${{car.price}}</p>
+            </div>
+        </div>
+    </div>
+{% endfor %}
+</div>
+{% endblock %}
